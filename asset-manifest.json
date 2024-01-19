@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/PiPD-front/static/css/main.f855e6bc.css",
+    "main.js": "/PiPD-front/static/js/main.c01481c7.js",
+    "static/js/787.d601ae25.chunk.js": "/PiPD-front/static/js/787.d601ae25.chunk.js",
+    "index.html": "/PiPD-front/index.html",
+    "main.f855e6bc.css.map": "/PiPD-front/static/css/main.f855e6bc.css.map",
+    "main.c01481c7.js.map": "/PiPD-front/static/js/main.c01481c7.js.map",
+    "787.d601ae25.chunk.js.map": "/PiPD-front/static/js/787.d601ae25.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.c01481c7.js"
+  ]
+}
