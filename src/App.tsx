@@ -14,7 +14,7 @@ function App() {
         algorithm: theme.darkAlgorithm,
         token: {
           // colorPrimary: "orange",
-          borderRadius: 20,
+          borderRadius: 999,
         },
       }}
     >
