@@ -11,8 +11,11 @@ import {
   FileOutlined,
   GlobalOutlined,
 } from "@ant-design/icons";
-import { Content, Footer, Header } from "antd/es/layout/layout";
+import { Content, Footer } from "antd/es/layout/layout";
 import StationsMap from "./StationsMap";
+import { Input } from "antd";
+const { Header } = Layout;
+const { Search } = Input;
 
 const AppLayout = ({ stations }: { stations: Station[] }) => {
   return (
@@ -36,9 +39,28 @@ const AppLayout = ({ stations }: { stations: Station[] }) => {
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          {/* <Header style={{ padding: 0 }}>
-                        <h1 style={{ marginLeft: '20px' }}>Zanieczyszczanie.pl</h1>
-                    </Header> */}
+          {/* <Header
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0 50px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <img
+                src="/logo512.png"
+                alt="Logo"
+                style={{ marginRight: "16px" }}
+              />
+              <h1 style={{ margin: 0, color: "lightblue" }}>Pol-luttion</h1>
+            </div>
+            <Search
+              placeholder="input search text"
+              onSearch={(value) => console.log(value)}
+              style={{ width: 200 }}
+            />
+          </Header> */}
           <Content style={{ margin: "16px", color: "white" }}>
             <div style={{ padding: 24, minHeight: 360 }}>
               <Routes>

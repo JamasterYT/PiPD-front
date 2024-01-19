@@ -9,7 +9,8 @@ import { Content, Header } from "antd/es/layout/layout";
 import AppLayout from "./components/AppLayout";
 import { Station } from "./components/ComponentA";
 import { baseURL } from "./utils/constants";
-
+import { Input } from "antd";
+const { Search } = Input;
 function App() {
   const [stations, setStations] = useState<Station[]>([]);
   useEffect(() => {
@@ -33,11 +34,14 @@ function App() {
   return (
     <ConfigProvider
       theme={{
-        algorithm: theme.darkAlgorithm,
+        algorithm: theme.darkAlgorithm, // Use the dark algorithm for a modern look
         token: {
-          // colorPrimary: "orange",
-          borderRadius: 999,
-          // colorBgContainer: "#001529",
+          borderRadius: 999, // Fully rounded borders for a modern feel
+          fontFamily: "Roboto, sans-serif", // Clean and widely supported font
+          colorText: "#e6f7ff", // Light text color for contrast on dark backgrounds
+          colorPrimary: "#1890ff", // A bright blue for primary buttons and accents
+          colorBgContainer: "#001529", // Dark background for containers
+          // You can customize additional tokens as needed
         },
       }}
     >
