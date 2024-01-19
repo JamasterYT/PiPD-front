@@ -58,6 +58,23 @@ export interface AirQualityIndex {
   stSourceDataDate?: string;
 }
 
+export const getTagColor = (indexLevelName?: string): string => {
+  switch (indexLevelName) {
+    case "Bardzo dobry":
+      return "green";
+    case "Dobry":
+      return "green";
+    case "Umiarkowany":
+      return "orange";
+    case "Dostateczny":
+      return "volcano";
+    case "Zły":
+      return "red";
+    default:
+      return "gray";
+  }
+};
+
 const ComponentB = ({ stations }: { stations: Station[] }) => {
   const [stationId, setStationId] = useState(null);
   const [airQualityData, setAirQualityData] = useState<AirQualityIndex | null>(
@@ -66,23 +83,6 @@ const ComponentB = ({ stations }: { stations: Station[] }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<String | null>(null);
   const [selectedStationId, setSelectedStationId] = useState(undefined);
-
-  const getTagColor = (indexLevelName?: string): string => {
-    switch (indexLevelName) {
-      case "Bardzo dobry":
-        return "green";
-      case "Dobry":
-        return "green";
-      case "Umiarkowany":
-        return "orange";
-      case "Dostateczny":
-        return "volcano";
-      case "Zły":
-        return "red";
-      default:
-        return "gray";
-    }
-  };
 
   const renderDescriptionItem = (
     label: string,

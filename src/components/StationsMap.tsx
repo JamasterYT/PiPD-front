@@ -1,5 +1,4 @@
-// @ts-nocheck
-import React from "react";
+import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -7,6 +6,10 @@ import { Station } from "./ComponentA";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import { AirQualityIndex, getTagColor } from "./ComponentB";
+import { baseURL } from "../utils/constants";
+import { Tag } from "antd";
+import { DesktopOutlined, LoadingOutlined } from "@ant-design/icons";
 
 const customMarkerIcon = L.icon({
   iconRetinaUrl: markerIcon2x,
@@ -28,6 +31,38 @@ L.Icon.Default.mergeOptions({
 const StationsMap = ({ stations }: { stations: Station[] }) => {
   // Przykładowa pozycja początkowa mapy - centrum Polski
   const defaultPosition: L.LatLngTuple = [51.9194, 19.1451];
+  const [stationId, setStationId] = useState(null);
+  const [airQualityData, setAirQualityData] = useState<AirQualityIndex | null>(
+    null
+  );
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<String | null>(null);
+  const [selectedStationId, setSelectedStationId] = useState(undefined);
+
+  const fetchAirQualityData = async (stationId: any) => {
+    setAirQualityData(null);
+    setSelectedStationId(stationId); // Ustaw wybrane ID stacji
+    if (!stationId) {
+      setError("Proszę wybrać ID stacji.");
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(`${baseURL}/air-quality-index/${stationId}`);
+      if (!response.ok) {
+        throw new Error("Problem z odpowiedzią serwera");
+      }
+      const data = await response.json();
+      setAirQualityData(data);
+    } catch (err: any) {
+      setError(err.message);
+      setAirQualityData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <MapContainer
@@ -43,13 +78,27 @@ const StationsMap = ({ stations }: { stations: Station[] }) => {
         <Marker
           key={station.id}
           position={[parseFloat(station.gegrLat), parseFloat(station.gegrLon)]}
+          eventHandlers={{
+            click: () => {
+              fetchAirQualityData(station.id);
+            },
+          }}
         >
           <Popup>
-            {station.stationName}
-            <br />
-            {station.city && station.city.name}
-            <br />
-            {station.addressStreet}
+            {airQualityData && station.id === selectedStationId ? (
+              <>
+                <Tag
+                  color={getTagColor(
+                    airQualityData.stIndexLevel?.indexLevelName
+                  )}
+                >
+                  {airQualityData.stIndexLevel?.indexLevelName}
+                </Tag>
+                {/* Inne informacje, które chcesz wyświetlić */}
+              </>
+            ) : (
+              <LoadingOutlined />
+            )}
           </Popup>
         </Marker>
       ))}
