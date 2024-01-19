@@ -33,7 +33,7 @@ function App() {
   return (
     <ConfigProvider
       theme={{
-        // algorithm: theme.darkAlgorithm,
+        algorithm: theme.darkAlgorithm,
         token: {
           // colorPrimary: "orange",
           borderRadius: 999,

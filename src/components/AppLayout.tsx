@@ -9,6 +9,7 @@ import {
   PieChartOutlined,
   DesktopOutlined,
   FileOutlined,
+  GlobalOutlined,
 } from "@ant-design/icons";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import StationsMap from "./StationsMap";
@@ -24,12 +25,12 @@ const AppLayout = ({ stations }: { stations: Station[] }) => {
               <Link to="/tabela-stacji">Lista stacji</Link>
             </Menu.Item>
             <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <Link to="/component-b">Analiza</Link>
+              <Link to="/zbadaj-stacje">Wyszukaj stację</Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<FileOutlined />}>
+            {/* <Menu.Item key="3" icon={<FileOutlined />}>
               <Link to="/component-c">Raporty</Link>
-            </Menu.Item>
-            <Menu.Item key="4" icon={<FileOutlined />}>
+            </Menu.Item> */}
+            <Menu.Item key="4" icon={<GlobalOutlined />}>
               <Link to="/mapa">Mapa</Link>
             </Menu.Item>
           </Menu>
@@ -46,7 +47,7 @@ const AppLayout = ({ stations }: { stations: Station[] }) => {
                   element={<ComponentA stations={stations} />}
                 />
                 <Route
-                  path="/component-b"
+                  path="/zbadaj-stacje"
                   element={<ComponentB stations={stations} />}
                 />
                 <Route path="/component-c" element={<ComponentC />} />

@@ -9,7 +9,7 @@ import {
   Typography,
 } from "antd";
 import { baseURL } from "../utils/constants";
-
+import { Row, Col } from "antd";
 const { Title } = Typography;
 const { Option } = Select;
 export interface Station {
@@ -129,72 +129,72 @@ const ComponentB = ({ stations }: { stations: Station[] }) => {
   };
 
   return (
-    <div>
-      <Title level={3}>Indeksy zanieczyszczenia dla danej stacji</Title>
-      <Select
-        showSearch
-        style={{ width: 200 }}
-        // onSearch={fetchAirQualityData}
-        placeholder="Wybierz ID stacji"
-        optionFilterProp="children"
-        notFoundContent={loading ? <Spin size="small" /> : null}
-        onChange={(value) => setStationId(value)}
-        filterOption={(input, option: any) =>
-          option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-        }
-      >
-        {stations.map((station) => (
-          <Option key={station.id} value={station.id}>
-            {station.stationName}
-          </Option>
-        ))}
-      </Select>
-      <Button
-        type="primary"
-        onClick={fetchAirQualityData}
-        disabled={!stationId}
-      >
-        Pobierz dane
-      </Button>
-      {loading && <Spin />}
-      {error && (
-        <Alert message="Błąd" description={error} type="error" showIcon />
-      )}
-      {airQualityData && (
-        <div style={{ margin: 16 }}>
-          <Descriptions bordered size="small" column={1}>
-            {renderDescriptionItem(
-              "Ogólny stan powietrza",
-              airQualityData.stIndexLevel?.indexLevelName,
-              airQualityData.stIndexLevel
-            )}
-            {renderDescriptionItem(
-              "NO2 - Indeks jakości",
-              airQualityData.no2IndexLevel?.indexLevelName,
-              airQualityData.no2IndexLevel
-            )}
-            {renderDescriptionItem(
-              "O3 - Indeks jakości",
-              airQualityData.o3IndexLevel?.indexLevelName,
-              airQualityData.o3IndexLevel
-            )}
-            {renderDescriptionItem(
-              "PM10 - Indeks jakości",
-              airQualityData.pm10IndexLevel?.indexLevelName,
-              airQualityData.pm10IndexLevel
-            )}
-            {renderDescriptionItem(
-              "PM25 - Indeks jakości",
-              airQualityData.pm25IndexLevel?.indexLevelName,
-              airQualityData.pm25IndexLevel
-            )}
-            {renderDescriptionItem("Data pomiaru", airQualityData.stCalcDate)}
-
-            {/* Dodaj więcej elementów w ten sposób */}
-          </Descriptions>
-        </div>
-      )}
-    </div>
+    <Row justify="center">
+      <Col xs={24} lg={12}>
+        {" "}
+        {/* Adjust the span as needed for different screen sizes */}
+        <Title level={3}>Indeksy zanieczyszczenia dla danej stacji</Title>
+        <Select
+          showSearch
+          style={{ width: 200 }}
+          // onSearch={fetchAirQualityData}
+          placeholder="Wybierz ID stacji"
+          optionFilterProp="children"
+          notFoundContent={loading ? <Spin size="small" /> : null}
+          onChange={(value) => setStationId(value)}
+          filterOption={(input, option: any) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+        >
+          {stations.map((station) => (
+            <Option key={station.id} value={station.id}>
+              {station.stationName}
+            </Option>
+          ))}
+        </Select>
+        <Button
+          type="primary"
+          onClick={fetchAirQualityData}
+          disabled={!stationId}
+          style={{ marginTop: 16, marginBottom: 16, marginLeft: 15 }}
+        >
+          Pobierz dane
+        </Button>
+        {/* Spinners, alerts, and descriptions here */}
+        {airQualityData && (
+          <div>
+            <Descriptions bordered size="small" column={1}>
+              {renderDescriptionItem(
+                "Ogólny stan powietrza",
+                airQualityData.stIndexLevel?.indexLevelName,
+                airQualityData.stIndexLevel
+              )}
+              {renderDescriptionItem(
+                "NO2 - Indeks jakości",
+                airQualityData.no2IndexLevel?.indexLevelName,
+                airQualityData.no2IndexLevel
+              )}
+              {renderDescriptionItem(
+                "O3 - Indeks jakości",
+                airQualityData.o3IndexLevel?.indexLevelName,
+                airQualityData.o3IndexLevel
+              )}
+              {renderDescriptionItem(
+                "PM10 - Indeks jakości",
+                airQualityData.pm10IndexLevel?.indexLevelName,
+                airQualityData.pm10IndexLevel
+              )}
+              {renderDescriptionItem(
+                "PM25 - Indeks jakości",
+                airQualityData.pm25IndexLevel?.indexLevelName,
+                airQualityData.pm25IndexLevel
+              )}
+              {renderDescriptionItem("Data pomiaru", airQualityData.stCalcDate)}
+            </Descriptions>
+          </div>
+        )}
+      </Col>
+    </Row>
   );
 };
 
