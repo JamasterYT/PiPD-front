@@ -94,7 +94,7 @@ const StationsMap = ({ stations }: { stations: Station[] }) => {
                 >
                   {airQualityData.stIndexLevel?.indexLevelName}
                 </Tag>
-                {/* Inne informacje, które chcesz wyświetlić */}
+                
               </>
             ) : (
               <LoadingOutlined />

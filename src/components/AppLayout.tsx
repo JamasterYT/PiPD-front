@@ -10,10 +10,13 @@ import {
   DesktopOutlined,
   FileOutlined,
   GlobalOutlined,
+  CalculatorOutlined,
 } from "@ant-design/icons";
 import { Content, Footer } from "antd/es/layout/layout";
 import StationsMap from "./StationsMap";
 import { Input } from "antd";
+import HistoricDataForm from "./HistoricDataForm";
+import StationsTable from "./StationsTable";
 const { Header } = Layout;
 const { Search } = Input;
 
@@ -36,31 +39,15 @@ const AppLayout = ({ stations }: { stations: Station[] }) => {
             <Menu.Item key="4" icon={<GlobalOutlined />}>
               <Link to="/mapa">Mapa</Link>
             </Menu.Item>
+            <Menu.Item key="5" icon={<FileOutlined />}>
+              <Link to="/history">Historyczne dane</Link>
+            </Menu.Item>
+            <Menu.Item key="6" icon={<CalculatorOutlined />}>
+              <Link to="/korelacja">Liczenie korelacji</Link>
+            </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          {/* <Header
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "0 50px",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <img
-                src="/logo512.png"
-                alt="Logo"
-                style={{ marginRight: "16px" }}
-              />
-              <h1 style={{ margin: 0, color: "lightblue" }}>Pol-luttion</h1>
-            </div>
-            <Search
-              placeholder="input search text"
-              onSearch={(value) => console.log(value)}
-              style={{ width: 200 }}
-            />
-          </Header> */}
           <Content style={{ margin: "16px", color: "white" }}>
             <div style={{ padding: 24, minHeight: 360 }}>
               <Routes>
@@ -77,6 +64,8 @@ const AppLayout = ({ stations }: { stations: Station[] }) => {
                   path="/mapa"
                   element={<StationsMap stations={stations} />}
                 />
+                <Route path="/history" element={<HistoricDataForm />} />
+                <Route path="/korelacja" element={<StationsTable />} />
               </Routes>
             </div>
           </Content>
